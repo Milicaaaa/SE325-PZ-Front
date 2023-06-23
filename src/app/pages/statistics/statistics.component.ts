@@ -16,7 +16,7 @@ export class StatisticsComponent implements OnInit {
   new Chart("myChart", {
     type: 'bar',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green'],
+      labels: ['6', '7', '8', '9', '10'],
       datasets: [{
         label: '# of Votes',
         data: [6,7,8,6,7,8,9,10],
@@ -42,7 +42,7 @@ export class StatisticsComponent implements OnInit {
     data: {
       labels: ['Red', 'Blue', 'Yellow', 'Green'],
       datasets: [{
-        label: '# of Votes',
+        label: '# of Grades',
         data: [6,7,8,6,7,8,9,10],
         borderWidth: 1,
         backgroundColor: '#B5A8F0'

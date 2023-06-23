@@ -39,6 +39,7 @@ import { ReportWidgetComponent } from './widgets/report-widget/report-widget.com
 import { CourseActivityDetailComponent } from './pages/course-activity-detail/course-activity-detail.component';
 import { CourseExamDetailsComponent } from './pages/course-exam-details/course-exam-details.component';
 import { CourseStudentActivitiesDetailsComponent } from './pages/course-student-activities-details/course-student-activities-details.component';
+import { CourseActivitiesByStudentComponent } from './pages/course-activities-by-student/course-activities-by-student.component';
 
 
 const routes: Routes = [
@@ -58,9 +59,12 @@ const routes: Routes = [
   { path: 'exams/:id', component: ExamsFormComponent },
   {path:'exams', component:ExamsComponent},
   {path : 'course-activity/:id/:code', component: CourseActivityDetailComponent},
-  {path : 'courses/course-exam/:id', component: CourseExamDetailsComponent}
-
+  {path : 'courses/course-exam/:id', component: CourseExamDetailsComponent},
+  {path : 'course-student-activity/:id', component: CourseStudentActivitiesDetailsComponent},
+  {path : 'course-student-activity/:courseId/courses/professor-activities/:studentId', component: CourseActivitiesByStudentComponent},
 ];
+
+
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -69,10 +73,10 @@ export function tokenGetter() {
 export function jwtOptionsFactory() {
   return {
     tokenGetter: () => {
-   return localStorage.getItem('token');
+      return localStorage.getItem('token');
     },
-    allowedDomains: ['http://localhost:4200'], 
- };
+    allowedDomains: ['http://localhost:4200'],
+  };
 }
 
 @NgModule({
@@ -107,6 +111,7 @@ export function jwtOptionsFactory() {
     CourseActivityDetailComponent,
     CourseExamDetailsComponent,
     CourseStudentActivitiesDetailsComponent,
+    CourseActivitiesByStudentComponent,
   ],
   imports: [
     BrowserModule,
@@ -119,10 +124,11 @@ export function jwtOptionsFactory() {
       jwtOptionsProvider: {
         provide: JWT_OPTIONS,
         useFactory: jwtOptionsFactory,
-      },})
+      },
+    })
 
   ],
-  providers: [    {
+  providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: JwtInterceptor,
     multi: true,

@@ -13,6 +13,7 @@ export class ProfileComponent {
   student : Student;
   professor : Professor;
   role : String;
+  averageGrade: number;
 
   constructor(private accountService: AccountService){}
 
@@ -26,8 +27,10 @@ export class ProfileComponent {
       if (this.role === "PROFESSOR" || this.role === "ASSISTANT"){
           this.professor = response
       }else{
-        console.warn(response)
-          this.student = response
+          this.student = response;
+          this.accountService.getAverageGrade(this.student.id).subscribe(data =>{
+            this.averageGrade = data
+          })
       }
     })
   }

@@ -35,4 +35,8 @@ export class AccountService {
     return this.http.get<any>('http://localhost:8080/api/students', {headers});
   }
 
+  getAverageGrade(studentId: number){
+    return this.http.get<any>(`http://localhost:8080/api/students/average-grade/${studentId}`, {headers});
+  }
+
 }
